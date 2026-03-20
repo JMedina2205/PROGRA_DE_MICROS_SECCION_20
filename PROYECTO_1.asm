@@ -4,14 +4,14 @@
 *
 * Creado: 20/02/2026
 * Autor : JAVIER MEDINA - 22124
-* Descripción: PROYECTO 1: RELOJ
+* DescripciÃ³n: PROYECTO 1: RELOJ
 */
 //=========================================================
 
 .include "M328PDEF.inc"
 
 //=========================================================
-// VECTORES DE INTERRUPCIÓN
+// VECTORES DE INTERRUPCIÃ“N
 //=========================================================
 .cseg
 .org 0x0000
@@ -65,7 +65,7 @@ TABLA:
 .DB 0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x07,0x7F,0x6F
 
 //=========================================================
-// CONFIGURACIÓN TIMER0 (MULTIPLEX)
+// CONFIGURACIÃ“N TIMER0 (MULTIPLEX)
 //=========================================================
 CLR		R16
 OUT		TCCR0A, R16               // MODO NORMAL
@@ -80,7 +80,7 @@ LDI		R16, (1 << TOIE0)           // INTERRUPCION
 STS		TIMSK0, R16
 
 //=========================================================
-// CONFIGURACIÓN TIMER1 (1 SEGUNDO)
+// CONFIGURACIÃ“N TIMER1 (1 SEGUNDO)
 //=========================================================
 CLR		R16
 STS		TCCR1A, R16
@@ -620,11 +620,11 @@ DEC		R20
 RET
 
 //=========================================================
-// INTERRUPCIÓN TIMER0 (MULTIPLEXADO & LEDS RELOJ)
+// INTERRUPCIÃ“N TIMER0 (MULTIPLEXADO & LEDS RELOJ)
 //=========================================================
 TIMER0_ISR:
 
-
+PUSH    R15
 PUSH	R16
 PUSH	R24
 
@@ -703,12 +703,13 @@ CBI		PORTC, PC3
 CBI		PORTC, PC4
 
 SALIDA_TIMER0:
-POP		R24
+POP		R15
 POP		R16
+POP		R24
 RETI
 
 //=========================================================
-// INTERRUPCIÓN TIMER1
+// INTERRUPCIÃ“N TIMER1
 //=========================================================
 TIMER1_ISR:
 
